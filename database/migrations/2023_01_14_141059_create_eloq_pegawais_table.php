@@ -13,14 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('eloq_pegawai', function (Blueprint $table) {
-            $table->id();
-            $table->string('pegawai_nama');
-            $table->string('pegawai_jabatan');
-            $table->integer('pegawai_umur');
-            $table->text('alamat');
-            $table->timestamps();
-        });
+        Schema::dropIfExists('eloq_pegawai');
     }
 
     /**
@@ -30,6 +23,5 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eloq_pegawai');
     }
 };

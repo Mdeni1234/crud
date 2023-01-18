@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PegawaiController;
+use App\Http\Livewire\PegawaiComponent;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +19,9 @@ use App\Http\Controllers\PegawaiController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/pegawai',[PegawaiController::class, 'index']);
-Route::get('/pegawai/tambah', [PegawaiController::class, 'tambah']);
-Route::post('/pegawai/store', [PegawaiController::class, 'store']);
-Route::get('/pegawai/edit/{id}', [PegawaiController::class, 'edit']);
-Route::post('/pegawai/update/', [PegawaiController::class, 'update']);
-Route::get('/pegawai/hapus/{id}', [PegawaiController::class, 'hapus']);
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('check_role:admin');
+
+Route::get('/pegawai', PegawaiComponent::class)->middleware('auth');
